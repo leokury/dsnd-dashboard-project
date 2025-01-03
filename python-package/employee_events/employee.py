@@ -1,35 +1,40 @@
 # Import the QueryBase class
-# YOUR CODE HERE
+import QueryBase from query_base
 
 # Import dependencies needed for sql execution
 # YOUR CODE HERE
 
 # Define a subclass of QueryBase
 # called Employee
-# YOUR CODE HERE
+class Employee(Querybase):
+
 
     # Set the class attribute `name`
     # to "employee"
-    # YOUR CODE HERE
+    name = "employee"
 
 
     # Define a method called `names`
     # that receives not arguments
     # This method should return a list of tuples
     # from an sql execution
-    # YOUR CODE HERE
+    def names(self):
         
         # Query 3
         # Write an SQL query
         # that selects the full name and id for all employees
-        # YOUR CODE HERE
+        query = """
+                    SELECT employee_id, first_name || ' ' || last_name as full_name
+                        FROM employee 
+                """
+        return self.run_query_df(query)
     
 
     # Define a method called `username`
     # that receives an `id` argument
     # This method should return a list of tuples
     # from an sql execution
-    # YOUR CODE HERE
+    def username(self, id: int):
         
         # Query 4
         # Write an SQL query
@@ -37,9 +42,14 @@
         # Use f-string formatting and a WHERE filter
         # to only return the full name of the employee
         # with an id equal to the id argument
-        # YOUR CODE HERE
+        query = f"""
+                SELECT first_name || ' ' || last_name as full_name
+                    FROM employee
+                    WHERE employee_id = {id}
+                """
+        return self.run_query_df(query)
 
-    # YOUR CODE HERE
+    
     # Below is method with an SQL query
     # This SQL query generates the data needed for
     # the machine learning model.
@@ -49,7 +59,7 @@
     # the sql query
     def model_data(self, id):
 
-        return f"""
+        query = f"""
                     SELECT SUM(positive_events) positive_events
                          , SUM(negative_events) negative_events
                     FROM {self.name}
@@ -57,3 +67,4 @@
                         USING({self.name}_id)
                     WHERE {self.name}.{self.name}_id = {id}
                 """
+        return self.run_query_df(query)
