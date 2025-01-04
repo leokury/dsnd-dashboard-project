@@ -1,36 +1,40 @@
 # Import the QueryBase class
-# YOUR CODE HERE
+import QueryBase from query_base
 
 # Import dependencies for sql execution
 # YOUR CODE HERE
 
 # Create a subclass of QueryBase
 # called  `Team`
-# YOUR CODE HERE
+class Team(QueryBase):
 
     # Set the class attribute `name`
     # to the string "team"
-    # YOUR CODE HERE
+    name = "team"
 
 
     # Define a `names` method
     # that receives not arguments
     # This method should return
     # a list of tuples from ana sql execution
-    # YOUR CODE HERE
+    def names(self):
         
         # Query 5
         # Write an SQL query that selects
         # the team_name and team_id columns
         # from the team table
-        # YOUR CODE HERE
+        query = """
+        SELECT team_id, team_name
+         FROM team
+        """
+        return self.run_query(query)
     
 
     # Define a `username` method
     # that receives an id argument
     # This method should return
     # a list of tuples from an sql execution
-    # YOUR CODE HERE
+    def username(self, id: int):
 
         # Query 6
         # Write an SQL query
@@ -38,7 +42,12 @@
         # Use f-string formatting and a WHERE filter
         # to only return the team name for
         # the id argument
-        # YOUR CODE HERE
+        query = f"""
+            SELECT team_name 
+                FROM team
+                WHERE team_id = {id}
+        """
+        return self.run_query(query)
 
     # YOUR CODE HERE
     # Below is method with an SQL query
@@ -50,7 +59,7 @@
     # the sql query
     def model_data(self, id):
 
-        return f"""
+        query = f"""
             SELECT positive_events, negative_events FROM (
                     SELECT employee_id
                          , SUM(positive_events) positive_events
@@ -62,3 +71,4 @@
                     GROUP BY employee_id
                    )
                 """
+        return self.run_query_df(query)
