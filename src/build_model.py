@@ -5,15 +5,16 @@ import random, pickle, json
 from sqlite3 import connect
 from datetime import timedelta, date
 from sklearn.linear_model import LogisticRegression
-from scipy.stats import norm, expon, uniform, skewnorm
+from scipy.stats import norm, expon, skewnorm
 
 
 cwd = Path('.').resolve()
 
+
 def left_skew(a, loc, size=500):
-    r = skewnorm.rvs(a = a , loc=loc, size=size) 
-    r = r - min(r)     
-    r= r / max(r) 
+    r = skewnorm.rvs(a=a, loc=loc, size=size)
+    r = r - min(r)
+    r = r / max(r) 
     r = r * loc  
     r = r.astype(int)       
     return random.choice(r)

@@ -1,5 +1,5 @@
 # Import any dependencies needed to execute sql queries
-import QueryMixin from sql_execution
+from employee_events.sql_execution import QueryMixin 
 # Define a class called QueryBase
 # that has no parent class
 class QueryBase(QueryMixin):
@@ -43,7 +43,7 @@ class QueryBase(QueryMixin):
 
     # Define a `notes` method that receives an id argument
     # This function should return a pandas dataframe
-    def notes(self, id: int)
+    def notes(self, id: int):
 
         # QUERY 2
         # Write an SQL query that returns `note_date`, and `note`

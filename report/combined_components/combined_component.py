@@ -15,6 +15,7 @@ class CombinedComponent:
 
         called = []
         for child in self.children:
+            
             if isinstance(child, FT):
                 called.append(child())
                 
