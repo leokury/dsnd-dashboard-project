@@ -4,38 +4,35 @@ from employee_events.query_base import QueryBase
 # Import dependencies needed for sql execution
 # YOUR CODE HERE
 
+
 # Define a subclass of QueryBase
 # called Employee
 class Employee(QueryBase):
 
-
     # Set the class attribute `name`
     # to "employee"
     name = "employee"
-
 
     # Define a method called `names`
     # that receives not arguments
     # This method should return a list of tuples
     # from an sql execution
     def names(self):
-        
         # Query 3
         # Write an SQL query
         # that selects the full name and id for all employees
         query = """
-                    SELECT employee_id, first_name || ' ' || last_name as full_name
-                        FROM employee 
+                    SELECT employee_id,
+                        first_name || ' ' || last_name as full_name
+                        FROM employee
                 """
         return self.run_query_df(query)
-    
 
     # Define a method called `username`
     # that receives an `id` argument
     # This method should return a list of tuples
     # from an sql execution
     def username(self, id: int):
-        
         # Query 4
         # Write an SQL query
         # that selects an employees full name
@@ -49,7 +46,6 @@ class Employee(QueryBase):
                 """
         return self.run_query_df(query)
 
-    
     # Below is method with an SQL query
     # This SQL query generates the data needed for
     # the machine learning model.

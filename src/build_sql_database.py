@@ -1,15 +1,11 @@
-from utils import *
+from utils import project_root, package_path
 import pandas as pd
 from sqlite3 import connect
-
-
 
 flatfile = project_root / 'src' / 'data' / 'employee_events.csv'
 db_path = package_path / 'employee_events.db'
 
 print(db_path)
-
-
 
 df = pd.read_csv(flatfile, encoding='cp1252')
 
@@ -41,7 +37,7 @@ table_settings = {
             },
         },
     'manager_notes': {
-        'column_map' :  {
+        'column_map':  {
             'recorded_note_from_sup': 'note',
             'event_date': 'note_date',
             'sup_ID': 'manager_id',
@@ -70,16 +66,19 @@ for table_name, settings in table_settings.items():
         frame = frame.drop_duplicates(subset=unique_id)
     if drop_id := settings.get('drop_id'):
         frame = frame[(frame[drop_id] != 'None') & (~frame[drop_id].isna())]
-    
+
     tables[table_name] = frame[settings['column_map'].values()]
 
-tables['team']['team_id'] = tables['team']['team_name'].str.split().apply(lambda x: x[-1])
-tables['manager_notes'] = tables['manager_notes'].merge(tables['team'], on='team_name')[tables['manager_notes'].columns.tolist() + ['team_id']]
+tables['team']['team_id'] = tables['team']['team_name'].str.split() \
+                                .apply(lambda x: x[-1])
+tables['manager_notes'] = tables['manager_notes'] \
+                            .merge(tables['team'],
+                                   on='team_name')[tables['manager_notes']
+                                                   .columns.tolist()
+                                                   + ['team_id']]
 tables['manager'] = tables['manager'].assign(
-    full_name = lambda x: x.first_name + ' ' + x.last_name,
+    full_name=lambda x: x.first_name + ' ' + x.last_name,
     ).drop(['first_name', 'last_name'], axis=1)
-
-
 
 event_type_map = {
     'Presence': 'Positive',
@@ -101,7 +100,8 @@ event_type_map = {
 
 
 team_map = {}
-tables['team'].apply(lambda x: team_map.update({x.team_name: x.team_id}), axis=1)
+tables['team'].apply(lambda x: team_map.update({x.team_name: x.team_id}),
+                     axis=1)
 print(team_map)
 
 

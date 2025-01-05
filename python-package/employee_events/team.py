@@ -4,6 +4,7 @@ from employee_events.query_base import QueryBase
 # Import dependencies for sql execution
 # YOUR CODE HERE
 
+
 # Create a subclass of QueryBase
 # called  `Team`
 class Team(QueryBase):
@@ -12,13 +13,12 @@ class Team(QueryBase):
     # to the string "team"
     name = "team"
 
-
     # Define a `names` method
     # that receives not arguments
     # This method should return
     # a list of tuples from ana sql execution
     def names(self):
-        
+
         # Query 5
         # Write an SQL query that selects
         # the team_name and team_id columns
@@ -28,14 +28,12 @@ class Team(QueryBase):
          FROM team
         """
         return self.run_query(query)
-    
 
     # Define a `username` method
     # that receives an id argument
     # This method should return
     # a list of tuples from an sql execution
     def username(self, id: int):
-
         # Query 6
         # Write an SQL query
         # that selects the team_name column
@@ -43,7 +41,7 @@ class Team(QueryBase):
         # to only return the team name for
         # the id argument
         query = f"""
-            SELECT team_name 
+            SELECT team_name
                 FROM team
                 WHERE team_id = {id}
         """
