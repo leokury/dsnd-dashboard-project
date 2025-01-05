@@ -40,3 +40,15 @@ This repository contains starter code for the **Software Engineering for Data Sc
 ├── tests
     └── test_employee_events.py
 ```
+
+### Environment
+
+The project uses Python's FastHTML framework and SQLite as database.
+
+For running the app:
+
+```
+python dashboard.py
+```
+
+Open the browser using the provided URL to access the app.
