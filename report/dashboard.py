@@ -73,7 +73,8 @@ class LineChart(MatplotlibViz):
     # method. Use the same parameters as the parent
     def visualization(self, entity_id, model):
 
-        if not entity_id: return
+        if not entity_id:
+            return
 
         # Pass the `asset_id` argument to
         # the model's `event_counts` method to
@@ -125,7 +126,8 @@ class BarChart(MatplotlibViz):
     # Use the same parameters as the parent
     def visualization(self, entity_id, model):
 
-        if not entity_id: return
+        if not entity_id:
+            return
 
         # Using the model and asset_id arguments
         # pass the `asset_id` to the `.model_data` method

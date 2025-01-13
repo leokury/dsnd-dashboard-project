@@ -21,8 +21,8 @@ class QueryBase(QueryMixin):
     # This method should return a pandas dataframe
     def event_counts(self, id: int):
         print("-----NAME:", self.name)
-        
-        if not self.name: 
+
+        if not self.name:
             return None
         # QUERY 1
         # Write an SQL query that groups by `event_date`
