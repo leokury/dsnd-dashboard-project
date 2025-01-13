@@ -73,6 +73,8 @@ class LineChart(MatplotlibViz):
     # method. Use the same parameters as the parent
     def visualization(self, entity_id, model):
 
+        if not entity_id: return
+
         # Pass the `asset_id` argument to
         # the model's `event_counts` method to
         # receive the x (Day) and y (event count)
@@ -122,6 +124,8 @@ class BarChart(MatplotlibViz):
     # Overwrite the parent class `visualization` method
     # Use the same parameters as the parent
     def visualization(self, entity_id, model):
+
+        if not entity_id: return
 
         # Using the model and asset_id arguments
         # pass the `asset_id` to the `.model_data` method
@@ -229,8 +233,8 @@ def index():
 # Set the route to /employee
 # and parameterize the employee id
 # to a string datatype
-@app.get('/employee/{id:str}')
-def _employee(id):
+@app.get('/employee/{id}')
+def _employee(id: str):
 
     # Call the initialized report
     # pass the id and an instance
@@ -244,9 +248,8 @@ def _employee(id):
 # Set the route to /team
 # and parameterize the team id
 # to a string datatype
-@app.get('/team/{id:str}')
-def _team(id):
-
+@app.get('/team/{id}')
+def _team(id: str):
     # Call the initialized report
     # pass the id and an instance
     # of the Team class as arguments

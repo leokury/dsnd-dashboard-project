@@ -26,7 +26,7 @@ class Employee(QueryBase):
                         first_name || ' ' || last_name as full_name
                         FROM employee
                 """
-        return self.run_query_df(query)
+        return self.run_query(query)
 
     # Define a method called `username`
     # that receives an `id` argument

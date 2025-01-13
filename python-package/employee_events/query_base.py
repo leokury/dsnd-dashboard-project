@@ -20,6 +20,10 @@ class QueryBase(QueryMixin):
     # that receives an `id` argument
     # This method should return a pandas dataframe
     def event_counts(self, id: int):
+        print("-----NAME:", self.name)
+        
+        if not self.name: 
+            return None
         # QUERY 1
         # Write an SQL query that groups by `event_date`
         # and sums the number of positive and negative events
@@ -29,7 +33,7 @@ class QueryBase(QueryMixin):
         # of id columns used for joining
         # order by the event_date column
         query = f"""
-                    SELECT event_data,
+                    SELECT event_date,
                         SUM(positive_events),
                         SUM(negative_events)
                      FROM {self.name}
